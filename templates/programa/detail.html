@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Programa Académico - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle del Programa Académico</h1>
+    <div class="header-actions">
+        <a href="{{ url_for('programa.edit', id=programa.id) }}" class="btn btn-warning">Editar</a>
+        <a href="{{ url_for('programa.list') }}" class="btn btn-secondary">← Volver</a>
+    </div>
+</div>
+
+<div class="detail-card">
+    <div class="detail-header">
+        <h2>{{ programa.nombre }}</h2>
+        <span class="badge">ID: {{ programa.id }}</span>
+    </div>
+    
+    <div class="detail-body">
+        <div class="detail-row">
+            <div class="detail-label">Tipo:</div>
+            <div class="detail-value">{{ programa.tipo }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Nivel:</div>
+            <div class="detail-value">{{ programa.nivel }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Fecha de Creación:</div>
+            <div class="detail-value">{{ programa.fecha_creacion }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Fecha de Cierre:</div>
+            <div class="detail-value">{{ programa.fecha_cierre or 'Activo' }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Número de Cohortes:</div>
+            <div class="detail-value">{{ programa.numero_cohortes }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Cantidad de Graduados:</div>
+            <div class="detail-value">{{ programa.cant_graduados }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Ciudad:</div>
+            <div class="detail-value">{{ programa.ciudad }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Facultad:</div>
+            <div class="detail-value">{{ programa.facultad }}</div>
+        </div>
+    </div>
+    
+    <div class="detail-footer">
+        <form method="POST" action="{{ url_for('programa.delete', id=programa.id) }}" class="inline-form" onsubmit="return confirm('¿Está seguro de eliminar este programa?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

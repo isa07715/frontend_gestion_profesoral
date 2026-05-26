@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Programas Académicos - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Programas Académicos</h1>
+    <a href="{{ url_for('programa.create') }}" class="btn btn-primary">
+        <span class="icon">+</span> Nuevo Programa
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Nivel</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for programa in programas %}
+            <tr>
+                <td data-label="ID">{{ programa.id }}</td>
+                <td data-label="Nombre">{{ programa.nombre }}</td>
+                <td data-label="Tipo">{{ programa.tipo }}</td>
+                <td data-label="Nivel">{{ programa.nivel }}</td>
+                <td data-label="Ciudad">{{ programa.ciudad }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('programa.detail', id=programa.id) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ url_for('programa.edit', id=programa.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <form method="POST" action="{{ url_for('programa.delete', id=programa.id) }}" class="inline-form" onsubmit="return confirm('¿Está seguro de eliminar este programa?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No hay programas académicos registrados</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

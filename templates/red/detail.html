@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Red Académica - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de la Red Académica</h1>
+    <div class="header-actions">
+        <a href="{{ url_for('red.edit', idr=red.idr) }}" class="btn btn-warning">Editar</a>
+        <a href="{{ url_for('red.list') }}" class="btn btn-secondary">← Volver</a>
+    </div>
+</div>
+
+<div class="detail-card">
+    <div class="detail-header">
+        <h2>{{ red.nombre }}</h2>
+        <span class="badge">ID: {{ red.idr }}</span>
+    </div>
+    
+    <div class="detail-body">
+        <div class="detail-row">
+            <div class="detail-label">Nombre:</div>
+            <div class="detail-value">{{ red.nombre }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">URL:</div>
+            <div class="detail-value"><a href="{{ red.url }}" target="_blank">{{ red.url }}</a></div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">País:</div>
+            <div class="detail-value">{{ red.pais }}</div>
+        </div>
+    </div>
+    
+    <div class="detail-footer">
+        <form method="POST" action="{{ url_for('red.delete', idr=red.idr) }}" class="inline-form" onsubmit="return confirm('¿Está seguro de eliminar esta red?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

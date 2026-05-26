@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="contact-page">
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contáctanos</h1>
+            <p>Estamos aquí para ayudarte. Ponte en contacto con nuestro equipo.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Formulario -->
+                <div class="contact-form-wrapper">
+                    <h2>Envíanos un Mensaje</h2>
+                    <form method="POST" action="{{ url_for('contact') }}" class="contact-form"form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Completo *</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellido">Apellido *</label>
+                                <input type="text" id="apellido" name="apellido" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="asunto">Asunto *</label>
+                            <select id="asunto" name="asunto" required>
+                                <option value="">Seleccione un asunto...</option>
+                                <option value="soporte">Soporte Técnico</option>
+                                <option value="informacion">Solicitud de Información</option>
+                                <option value="capacitacion">Capacitación</option>
+                                <option value="sugerencia">Sugerencias</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="privacidad" required>
+                                <span>Acepto la política de tratamiento de datos personales *</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <span class="icon">📧</span> Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Información de Contacto -->
+                <div class="contact-info-wrapper">
+                    <h2>Información de Contacto</h2>
+                    
+                    <div class="contact-info-card">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h4>Dirección</h4>
+                            <p>Ciudad Universitaria<br>Bogotá, Colombia</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h4>Teléfono</h4>
+                            <p>+57 (1) 123 4567<br>+57 (1) 123 4568</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-icon">📧</div>
+                        <div class="info-content">
+                            <h4>Correo Electrónico</h4>
+                            <p>gestion.profesoral@universidad.edu.co<br>soporte@universidad.edu.co</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-icon">🕐</div>
+                        <div class="info-content">
+                            <h4>Horario de Atención</h4>
+                            <p>Lunes a Viernes<br>8:00 am - 5:00 pm</p>
+                        </div>
+                    </div>
+
+                    <!-- Redes Sociales -->
+                    <div class="social-media">
+                        <h4>Síguenos</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link" title="Facebook">📘</a>
+                            <a href="#" class="social-link" title="Twitter">🐦</a>
+                            <a href="#" class="social-link" title="LinkedIn">💼</a>
+                            <a href="#" class="social-link" title="Instagram">📷</a>
+                            <a href="#" class="social-link" title="YouTube">📺</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa (Placeholder) -->
+    <section class="map-section">
+        <div class="container">
+            <div class="map-placeholder">
+                <div class="map-icon">🗺️</div>
+                <p>Mapa de Ubicación</p>
+                <small>Ciudad Universitaria, Bogotá, Colombia</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>¿Cómo puedo acceder al sistema?</h4>
+                    <p>Debes tener credenciales de usuario proporcionadas por el administrador del sistema. Dirígete a la página de inicio de sesión.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿Qué hago si olvidé mi contraseña?</h4>
+                    <p>Contacta al administrador del sistema o al área de soporte técnico para restablecer tu contraseña.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿El sistema está disponible 24/7?</h4>
+                    <p>Sí, el sistema está disponible las 24 horas, los 7 días de la semana. El soporte técnico opera en horario laboral.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿Cómo reporto un error técnico?</h4>
+                    <p>Puedes reportar errores a través del formulario de contacto o directamente al correo de soporte técnico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

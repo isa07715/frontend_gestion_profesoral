@@ -1,0 +1,43 @@
+# ═══════════════════════════════════════════════════════════════
+# FRONTEND FLASK - .gitignore
+# ═══════════════════════════════════════════════════════════════
+
+# Entorno virtual (no se sube, cada persona lo crea)
+venv/
+.venv/
+env/
+
+# Variables de entorno (contienen contraseñas y configuraciones sensibles)
+.env
+.env.development
+.env.production
+.env.local
+
+# Python cache
+_pycache_/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Flask
+instance/
+.webassets-cache

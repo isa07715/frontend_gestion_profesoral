@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Relacion Estudio-Area - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Relacion Estudio - Area</h1>
+    <a href="{{ url_for('estudio_ac.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('estudio_ac.edit', estudio=estudio, area_conocimiento=area_conocimiento) }}" class="crud-form">
+        
+        <div class="form-group">
+            <label>Estudio</label>
+            <input type="text" value="{{ registro.estudio }}" disabled>
+            <small class="form-help">La PK compuesta no se puede modificar</small>
+        </div>
+        
+        <div class="form-group">
+            <label>Area de Conocimiento</label>
+            <input type="text" value="{{ registro.area_conocimiento }}" disabled>
+        </div>
+        
+        <!-- SELECT PARA ESTUDIO (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="estudio">Estudio *</label>
+            <select class="form-select" name="estudio" required disabled>
+                {% for e in estudios %}
+                    <option value="{{ e.id }}"
+                        {{ 'selected' if registro and registro.estudio == e.id }}>
+                        {{ e.titulo }} ({{ e.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- SELECT PARA AREA CONOCIMIENTO (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="area_conocimiento">Area de Conocimiento *</label>
+            <select class="form-select" name="area_conocimiento" required disabled>
+                {% for a in areas %}
+                    <option value="{{ a.id }}"
+                        {{ 'selected' if registro and registro.area_conocimiento == a.id }}>
+                        {{ a.disciplina }} ({{ a.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('estudio_ac.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

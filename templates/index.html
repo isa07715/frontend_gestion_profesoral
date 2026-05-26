@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Sistema de Informacion del Conocimiento Universitario</h1>
+        <p>Gestionamos la informacion profesoral de la universidad para impulsar la excelencia academica y la investigacion.</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('about') }}" class="btn btn-secondary btn-lg">Conocer Mas</a>
+        </div>
+    </div>
+</section>
+
+<!-- Modulos Section -->
+<section class="modules-section">
+    <div class="container">
+        <h2 class="section-title">Modulos del Sistema</h2>
+        <div class="modules-grid">
+            <!-- ENTREGA 1 - Tablas sin FK -->
+            
+            <!-- Area de Conocimiento -->
+            <div class="module-card">
+                <div class="module-icon">📚</div>
+                <h3>Areas de Conocimiento</h3>
+                <p>Catalogo jerarquico de areas del conocimiento organizadas por gran area, area y disciplina.</p>
+                <a href="{{ url_for('area_conocimiento.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Termino Clave -->
+            <div class="module-card">
+                <div class="module-icon">🔑</div>
+                <h3>Terminos Clave</h3>
+                <p>Catalogo de terminos clave para clasificar proyectos e intereses de investigacion.</p>
+                <a href="{{ url_for('termino_clave.list') }}" class="btn-link">Ver modulo →</a> 
+            </div>
+
+            <!-- Linea de Investigacion -->
+            <div class="module-card">
+                <div class="module-icon">🔬</div>
+                <h3>Lineas de Investigacion</h3>
+                <p>Lineas de investigacion definidas en la universidad con nombre y descripcion.</p>
+                <a href="{{ url_for('linea_investigacion.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Programa Academico -->
+            <div class="module-card">
+                <div class="module-icon">🎓</div>
+                <h3>Programas Academicos</h3>
+                <p>Programas de pregrado, posgrado y especializaciones de cada facultad.</p>
+                <a href="{{ url_for('programa.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Red Academica -->
+            <div class="module-card">
+                <div class="module-icon">🌐</div>
+                <h3>Redes Academicas</h3>
+                <p>Redes de investigacion y profesionales en las que participan los docentes.</p>
+                <a href="{{ url_for('red.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- ENTREGA 2 - Tablas con FK -->
+
+            <!-- Docente -->
+            <div class="module-card">
+                <div class="module-icon">👨‍🏫</div>
+                <h3>Docentes</h3>
+                <p>Registro de profesores con informacion academica, contacto y produccion cientifica.</p>
+                <a href="{{ url_for('docente.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Estudios Realizados -->
+            <div class="module-card">
+                <div class="module-icon">📖</div>
+                <h3>Estudios Realizados</h3>
+                <p>Registro de estudios academicos realizados por los docentes.</p>
+                <a href="{{ url_for('estudios_realizados.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Vinculacion Docente -->
+            <div class="module-card">
+                <div class="module-icon">🏢</div>
+                <h3>Vinculacion Docente</h3>
+                <p>Vinculacion de docentes a programas academicos y departamentos con dedicacion y modalidad.</p>
+                <a href="{{ url_for('docente_departamento.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Intereses Futuros -->
+            <div class="module-card">
+                <div class="module-icon">🔮</div>
+                <h3>Intereses Futuros</h3>
+                <p>Intereses de investigacion futuros de los docentes clasificados por terminos clave.</p>
+                <a href="{{ url_for('intereses_futuros.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Evaluacion Docente -->
+            <div class="module-card">
+                <div class="module-icon">📊</div>
+                <h3>Evaluacion Docente</h3>
+                <p>Evaluaciones de desempeño de los docentes por semestre con calificacion numerica.</p>
+                <a href="{{ url_for('evaluacion_docente.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Reconocimientos -->
+            <div class="module-card">
+                <div class="module-icon">🏆</div>
+                <h3>Reconocimientos</h3>
+                <p>Reconocimientos, distinciones y premios obtenidos por los docentes a nivel local, nacional o internacional.</p>
+                <a href="{{ url_for('reconocimiento.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Experiencia Laboral -->
+            <div class="module-card">
+                <div class="module-icon">💼</div>
+                <h3>Experiencia Laboral</h3>
+                <p>Experiencia laboral y profesional de los docentes con cargo, institucion y fechas.</p>
+                <a href="{{ url_for('experiencia.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Redes Docente -->
+            <div class="module-card">
+                <div class="module-icon">🤝</div>
+                <h3>Redes Docente</h3>
+                <p>Participacion de docentes en redes academicas con fechas y actividades destacadas.</p>
+                <a href="{{ url_for('red_docente.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Estudio Area Conocimiento -->
+            <div class="module-card">
+                <div class="module-icon">📑</div>
+                <h3>Estudio Area Conocimiento</h3>
+                <p>Relacion entre estudios realizados y areas de conocimiento clasificadas.</p>
+                <a href="{{ url_for('estudio_ac.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Apoyo Profesoral -->
+            <div class="module-card">
+                <div class="module-icon">💰</div>
+                <h3>Apoyo Profesoral</h3>
+                <p>Apoyos institucionales recibidos por docentes para sus estudios con tipo e institucion.</p>
+                <a href="{{ url_for('apoyo_profesoral.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Becas -->
+            <div class="module-card">
+                <div class="module-icon">🎓</div>
+                <h3>Becas</h3>
+                <p>Becas otorgadas a docentes para realizar sus estudios con tipo, institucion y fechas.</p>
+                <a href="{{ url_for('beca.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- GESTIÓN DE USUARIOS -->
+
+            <!-- Roles -->
+            <div class="module-card">
+                <div class="module-icon">🔐</div>
+                <h3>Roles del Sistema</h3>
+                <p>Roles del sistema (admin, consulta, editor) con permisos y descripciones.</p>
+                <a href="{{ url_for('rol.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Usuarios -->
+            <div class="module-card">
+                <div class="module-icon">👤</div>
+                <h3>Usuarios</h3>
+                <p>Usuarios del sistema con credenciales de acceso, email y nombre completo.</p>
+                <a href="{{ url_for('usuario.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+
+            <!-- Roles por Usuario -->
+            <div class="module-card">
+                <div class="module-icon">🔗</div>
+                <h3>Roles por Usuario</h3>
+                <p>Asignacion de roles a usuarios del sistema (relacion muchos-a-muchos).</p>
+                <a href="{{ url_for('rol_usuario.list') }}" class="btn-link">Ver modulo →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>19</h3>
+                <p>Tablas Totales</p>
+            </div>
+            <div class="stat-card">
+                <h3>19</h3>
+                <p>Modulos Principales</p>
+            </div>
+            <div class="stat-card">
+                <h3>100%</h3>
+                <p>Disponibilidad</p>
+            </div>
+            <div class="stat-card">
+                <h3>24/7</h3>
+                <p>Soporte Tecnico</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Preview -->
+<section class="about-preview">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Sobre Nosotros</h2>
+                <p><strong>Mision:</strong> Gestionar y organizar el conocimiento profesoral de la universidad para fomentar la excelencia academica, la investigacion de calidad y la visibilidad del talento humano.</p>
+                <p><strong>Vision:</strong> Ser el sistema de referencia para la gestion de la informacion profesoral, apoyando la toma de decisiones institucionales y el desarrollo academico.</p>
+                <a href="{{ url_for('about') }}" class="btn btn-primary">Conocer mas</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

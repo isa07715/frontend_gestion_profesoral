@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Apoyo Profesoral - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Apoyo Institucional</h1>
+    <a href="{{ url_for('apoyo_profesoral.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('apoyo_profesoral.edit', estudios=apoyo.estudios) }}" class="crud-form">
+        
+        <div class="form-group">
+            <label for="estudios">Estudio</label>
+            <input type="text" id="estudios" name="estudios" value="{{ apoyo.estudios }}" disabled>
+            <small class="form-help">El estudio no se puede modificar (es la llave primaria)</small>
+        </div>
+        
+        <!-- SELECT PARA ESTUDIOS (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="estudios">Estudio *</label>
+            <select class="form-select" name="estudios" required disabled>
+                {% for e in estudios %}
+                    <option value="{{ e.id }}"
+                        {{ 'selected' if registro and registro.estudios == e.id }}>
+                        {{ e.titulo }} ({{ e.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="con_apoyo">Cuenta con Apoyo</label>
+            <select class="form-select" name="con_apoyo" required>
+                <option value="1" {% if apoyo.con_apoyo == 1 %}selected{% endif %}>Si</option>
+                <option value="0" {% if apoyo.con_apoyo == 0 %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="institucion">Institucion</label>
+            <input type="text" id="institucion" name="institucion" value="{{ apoyo.institucion }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo de Apoyo</label>
+            <input type="text" id="tipo" name="tipo" value="{{ apoyo.tipo }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('apoyo_profesoral.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

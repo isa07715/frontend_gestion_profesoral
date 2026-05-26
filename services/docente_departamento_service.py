@@ -1,0 +1,63 @@
+"""
+docente_departamento_service.py - Servicio para conectar con la API de docente_departamento.
+"""
+import requests
+from typing import Optional
+
+API_URL = "http://localhost:8000/api/docente_departamento"
+
+
+class DocenteDepartamentoService:
+    """Servicio para operaciones con la API de docente_departamento."""
+    
+    def __init__(self):
+        self.api_url = API_URL
+    
+    def get_all(self, limite: int = 1000) -> list:
+        """Obtiene todos los registros."""
+        try:
+            response = requests.get(f"{self.api_url}/?limite={limite}")
+            if response.status_code == 200:
+                return response.json()
+            return []
+        except Exception as e:
+            print(f"Error al obtener registros: {e}")
+            return []
+    
+    def get_by_id(self, docente: int, departamento: int) -> Optional[dict]:
+        """Obtiene un registro por PK compuesta."""
+        try:
+            response = requests.get(f"{self.api_url}/{docente}/{departamento}")
+            if response.status_code == 200:
+                return response.json()
+            return None
+        except Exception as e:
+            print(f"Error al obtener registro: {e}")
+            return None
+    
+    def create(self,  dict) -> bool:
+        """Crea un nuevo registro."""
+        try:
+            response = requests.post(self.api_url, json=data)
+            return response.status_code in [200, 201]
+        except Exception as e:
+            print(f"Error al crear registro: {e}")
+            return False
+    
+    def update(self, docente: int, departamento: int, data: dict) -> bool:
+        """Actualiza un registro."""
+        try:
+            response = requests.put(f"{self.api_url}/{docente}/{departamento}", json=data)
+            return response.status_code == 200
+        except Exception as e:
+            print(f"Error al actualizar registro: {e}")
+            return False
+    
+    def delete(self, docente: int, departamento: int) -> bool:
+        """Elimina un registro."""
+        try:
+            response = requests.delete(f"{self.api_url}/{docente}/{departamento}")
+            return response.status_code == 204
+        except Exception as e:
+            print(f"Error al eliminar registro: {e}")
+            return False

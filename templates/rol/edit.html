@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Rol - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Rol del Sistema</h1>
+    <a href="{{ url_for('rol.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('rol.edit', id=rol.id) }}" class="crud-form">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id" value="{{ rol.id }}" disabled>
+            <small class="form-help">El ID no se puede modificar</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre del Rol</label>
+            <input type="text" id="nombre" name="nombre" value="{{ rol.nombre }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="descripcion">Descripcion</label>
+            <textarea id="descripcion" name="descripcion" rows="4">{{ rol.descripcion or '' }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="activo">Estado</label>
+            <select id="activo" name="activo" required>
+                <option value="true" {% if rol.activo %}selected{% endif %}>Activo</option>
+                <option value="false" {% if not rol.activo %}selected{% endif %}>Inactivo</option>
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('rol.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

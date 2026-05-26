@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Apoyo Profesoral - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de Apoyo Institucional</h1>
+    <a href="{{ url_for('apoyo_profesoral.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion del Apoyo</h3>
+        <table class="detail-table">
+            <tr><th>Estudio (ID):</th><td>{{ apoyo.estudios }}</td></tr>
+            <tr><th>Cuenta con Apoyo:</th><td>{{ 'Si' if apoyo.con_apoyo == 1 else 'No' }}</td></tr>
+            <tr><th>Institucion:</th><td>{{ apoyo.institucion }}</td></tr>
+            <tr><th>Tipo de Apoyo:</th><td>{{ apoyo.tipo }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('apoyo_profesoral.edit', estudios=apoyo.estudios) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('apoyo_profesoral.delete', estudios=apoyo.estudios) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este apoyo?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

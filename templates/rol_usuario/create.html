@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva Asignacion de Rol - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Asignar Rol a Usuario</h1>
+    <a href="{{ url_for('rol_usuario.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('rol_usuario.create') }}" class="crud-form">
+        
+        <!-- SELECT PARA USUARIO -->
+        <div class="form-group">
+            <label for="usuario_id">Usuario *</label>
+            <select class="form-select" name="usuario_id" required>
+                <option value="">-- Seleccione Usuario --</option>
+                {% for u in usuarios %}
+                    <option value="{{ u.id }}"
+                        {{ 'selected' if registro and registro.usuario_id == u.id }}>
+                        {{ u.nombre_completo }} - {{ u.username }} ({{ u.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- SELECT PARA ROL -->
+        <div class="form-group">
+            <label for="rol_id">Rol *</label>
+            <select class="form-select" name="rol_id" required>
+                <option value="">-- Seleccione Rol --</option>
+                {% for r in roles %}
+                    <option value="{{ r.id }}"
+                        {{ 'selected' if registro and registro.rol_id == r.id }}>
+                        {{ r.nombre }} ({{ r.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{{ url_for('rol_usuario.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

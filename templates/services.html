@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Servicios - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="services-page">
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Nuestros Servicios</h1>
+            <p>Soluciones integrales para la gestión de información profesoral</p>
+        </div>
+    </section>
+
+    <!-- Servicios Principales -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">Módulos del Sistema</h2>
+            <div class="services-grid">
+                <div class="service-detail-card">
+                    <div class="service-icon">📚</div>
+                    <h3>Áreas de Conocimiento</h3>
+                    <p>Catálogo jerárquico de áreas del conocimiento organizadas por gran área, área y disciplina según estándares nacionales.</p>
+                    <ul class="service-features">
+                        <li>✓ Clasificación estandarizada</li>
+                        <li>✓ 218 registros de referencia</li>
+                        <li>✓ Búsqueda y filtrado avanzado</li>
+                    </ul>
+                    <a href="{{ url_for('area_conocimiento.list') }}" class="btn btn-primary">Acceder al Módulo</a>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-icon">🔑</div>
+                    <h3>Términos Clave</h3>
+                    <p>Catálogo de términos clave (keywords) para clasificar proyectos e intereses de investigación con traducción al inglés.</p>
+                    <ul class="service-features">
+                        <li>✓ Términos en español e inglés</li>
+                        <li>✓ Clasificación temática</li>
+                        <li>✓ Vinculación con intereses</li>
+                    </ul>
+                    <a href="{{ url_for('termino_clave.list') }}" class="btn btn-primary">Acceder al Módulo</a>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-icon">🔬</div>
+                    <h3>Líneas de Investigación</h3>
+                    <p>Líneas de investigación definidas en la universidad que se vinculan con grupos, semilleros, proyectos y docentes.</p>
+                    <ul class="service-features">
+                        <li>✓ Nombre y descripción</li>
+                        <li>✓ Vinculación con docentes</li>
+                        <li>✓ Gestión de grupos</li>
+                    </ul>
+                    <a href="{{ url_for('linea_investigacion.list') }}" class="btn btn-primary">Acceder al Módulo</a>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Programas Académicos</h3>
+                    <p>Programas de pregrado, posgrado y especializaciones de cada facultad con información completa de cohortes y graduados.</p>
+                    <ul class="service-features">
+                        <li>✓ 191 programas registrados</li>
+                        <li>✓ Información por facultad</li>
+                        <li>✓ Estadísticas de graduados</li>
+                    </ul>
+                    <a href="{{ url_for('programa.list') }}" class="btn btn-primary">Acceder al Módulo</a>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Redes Académicas</h3>
+                    <p>Catálogo de redes de investigación y profesionales en las que participan los docentes con URL y país de origen.</p>
+                    <ul class="service-features">
+                        <li>✓ URL de sitios web</li>
+                        <li>✓ País de origen</li>
+                        <li>✓ Vinculación con docentes</li>
+                    </ul>
+                    <a href="{{ url_for('red.list') }}" class="btn btn-primary">Acceder al Módulo</a>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-icon">👨‍🏫</div>
+                    <h3>Gestión de Docentes</h3>
+                    <p>Información completa del perfil profesoral incluyendo datos personales, estudios, evaluaciones y experiencia laboral.</p>
+                    <ul class="service-features">
+                        <li>✓ Perfil completo del docente</li>
+                        <li>✓ Enlace a CvLAC</li>
+                        <li>✓ Historial académico</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Próximamente</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Características -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Características del Sistema</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔐</div>
+                    <h4>Seguridad</h4>
+                    <p>Autenticación JWT y control de acceso por roles</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h4>Responsive</h4>
+                    <p>Accesible desde cualquier dispositivo</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Rendimiento</h4>
+                    <p>API REST optimizada y de alta velocidad</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>Reportes</h4>
+                    <p>Dashboard con consultas multitabla</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

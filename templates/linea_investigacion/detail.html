@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Línea de Investigación - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de la Línea de Investigación</h1>
+    <div class="header-actions">
+        <a href="{{ url_for('linea_investigacion.edit', id=linea.id) }}" class="btn btn-warning">✏️ Editar</a>
+        <a href="{{ url_for('linea_investigacion.list') }}" class="btn btn-secondary">← Volver</a>
+    </div>
+</div>
+
+<div class="detail-card">
+    <div class="detail-header">
+        <h2>{{ linea.nombre }}</h2>
+        <span class="badge">ID: {{ linea.id }}</span>
+    </div>
+    
+    <div class="detail-body">
+        <div class="detail-row">
+            <div class="detail-label">Nombre:</div>
+            <div class="detail-value">{{ linea.nombre }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Descripción:</div>
+            <div class="detail-value">{{ linea.descripcion }}</div>
+        </div>
+    </div>
+    
+    <div class="detail-footer">
+        <form method="POST" action="{{ url_for('linea_investigacion.delete', id=linea.id) }}" class="inline-form" onsubmit="return confirm('¿Está seguro de eliminar esta línea?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

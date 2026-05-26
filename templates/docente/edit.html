@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Docente - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Docente</h1>
+    <a href="{{ url_for('docente.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('docente.edit', cedula=docente.cedula) }}" class="crud-form">
+        <div class="form-group">
+            <label for="cedula">Cedula</label>
+            <input type="text" id="cedula" name="cedula" value="{{ docente.cedula }}" disabled>
+            <small class="form-help">La cedula no se puede modificar (es la llave primaria)</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombres">Nombres</label>
+            <input type="text" id="nombres" name="nombres" value="{{ docente.nombres }}" maxlength="60" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" value="{{ docente.apellidos }}" maxlength="60" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="genero">Genero</label>
+            <select class="form-select" name="genero" required>
+                <option value="M" {% if docente.genero == 'M' %}selected{% endif %}>Masculino</option>
+                <option value="F" {% if docente.genero == 'F' %}selected{% endif %}>Femenino</option>
+                <option value="O" {% if docente.genero == 'O' %}selected{% endif %}>Otro</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="cargo">Cargo</label>
+            <input type="text" id="cargo" name="cargo" value="{{ docente.cargo }}" maxlength="30" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_nacimiento">Fecha Nacimiento</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ docente.fecha_nacimiento }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="correo" value="{{ docente.correo }}" maxlength="70" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="telefono">Telefono</label>
+            <input type="text" id="telefono" name="telefono" value="{{ docente.telefono }}" maxlength="20" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="url_cvlac">URL CvLAC</label>
+            <input type="url" id="url_cvlac" name="url_cvlac" value="{{ docente.url_cvlac }}" maxlength="128" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_actualizacion">Fecha Actualizacion</label>
+            <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" value="{{ docente.fecha_actualizacion }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="escalafon">Escalafon</label>
+            <input type="text" id="escalafon" name="escalafon" value="{{ docente.escalafon }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="perfil">Perfil</label>
+            <textarea id="perfil" name="perfil" rows="4" required>{{ docente.perfil }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="cat_minciencia">Categoria Minciencia</label>
+            <input type="text" id="cat_minciencia" name="cat_minciencia" value="{{ docente.cat_minciencia or '' }}" maxlength="45">
+        </div>
+        
+        <div class="form-group">
+            <label for="conv_minciencia">Convocatoria Minciencia</label>
+            <input type="text" id="conv_minciencia" name="conv_minciencia" value="{{ docente.conv_minciencia }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="nacionalidaad">Nacionalidad</label>
+            <input type="text" id="nacionalidaad" name="nacionalidaad" value="{{ docente.nacionalidaad }}" maxlength="45" required>
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="linea_investigacion_principal">Linea de Investigacion Principal</label>
+            <select class="form-select" name="linea_investigacion_principal">
+                <option value="">-- Seleccione Linea --</option>
+                {% for li in lineas %}
+                    <option value="{{ li.id }}"
+                        {{ 'selected' if registro and registro.linea_investigacion_principal == li.id }}>
+                        {{ li.nombre }} ({{ li.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('docente.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

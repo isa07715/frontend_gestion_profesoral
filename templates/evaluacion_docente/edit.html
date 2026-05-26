@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Evaluacion - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Evaluacion Docente</h1>
+    <a href="{{ url_for('evaluacion_docente.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('evaluacion_docente.edit', id=evaluacion.id) }}" class="crud-form">
+        
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id" value="{{ evaluacion.id }}" disabled>
+        </div>
+        
+        <!-- SELECT PARA DOCENTE -->
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required>
+                <option value="">-- Seleccione Docente --</option>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="calificacion">Calificacion</label>
+            <input type="number" id="calificacion" name="calificacion" step="0.1" min="0" max="5" value="{{ evaluacion.calificacion }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="semestre">Semestre</label>
+            <input type="text" id="semestre" name="semestre" value="{{ evaluacion.semestre }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('evaluacion_docente.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

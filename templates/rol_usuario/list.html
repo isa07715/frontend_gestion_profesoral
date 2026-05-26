@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Roles por Usuario - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Asignacion de Roles a Usuarios</h1>
+    <a href="{{ url_for('rol_usuario.create') }}" class="btn btn-primary">+ Nueva Asignacion</a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Usuario ID</th>
+                <th>Rol ID</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+            <tr>
+                <td>{{ registro.usuario_id }}</td>
+                <td>{{ registro.rol_id }}</td>
+                <td class="actions">
+                    <form method="POST" action="{{ url_for('rol_usuario.delete', usuario_id=registro.usuario_id, rol_id=registro.rol_id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar esta asignacion?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="text-center">No hay asignaciones de roles registradas</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

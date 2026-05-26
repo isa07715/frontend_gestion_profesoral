@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Reconocimiento - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de Reconocimiento</h1>
+    <a href="{{ url_for('reconocimiento.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion del Reconocimiento</h3>
+        <table class="detail-table">
+            <tr><th>ID:</th><td>{{ reconocimiento.id }}</td></tr>
+            <tr><th>Docente (Cedula):</th><td>{{ reconocimiento.docente }}</td></tr>
+            <tr><th>Nombre:</th><td>{{ reconocimiento.nombre }}</td></tr>
+            <tr><th>Tipo:</th><td>{{ reconocimiento.tipo }}</td></tr>
+            <tr><th>Institucion:</th><td>{{ reconocimiento.institucion }}</td></tr>
+            <tr><th>Ambito:</th><td>{{ reconocimiento.ambito }}</td></tr>
+            <tr><th>Fecha:</th><td>{{ reconocimiento.fecha }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('reconocimiento.edit', id=reconocimiento.id) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('reconocimiento.delete', id=reconocimiento.id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este reconocimiento?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

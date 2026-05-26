@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Estudio - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle Estudio Realizado</h1>
+    <a href="{{ url_for('estudios_realizados.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion del Estudio</h3>
+        <table class="detail-table">
+            <tr><th>ID:</th><td>{{ estudio.id }}</td></tr>
+            <tr><th>Titulo:</th><td>{{ estudio.titulo }}</td></tr>
+            <tr><th>Universidad:</th><td>{{ estudio.universidad }}</td></tr>
+            <tr><th>Fecha:</th><td>{{ estudio.fecha }}</td></tr>
+            <tr><th>Tipo:</th><td>{{ estudio.tipo }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Ubicacion</h3>
+        <table class="detail-table">
+            <tr><th>Ciudad:</th><td>{{ estudio.ciudad }}</td></tr>
+            <tr><th>Pais:</th><td>{{ estudio.pais }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Docente</h3>
+        <table class="detail-table">
+            <tr><th>Cedula Docente:</th><td>{{ estudio.docente }}</td></tr>
+            <tr><th>Institucion Acreditada:</th><td>{{ 'Si' if estudio.ins_acreditada == 1 else 'No' }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Detalles Academicos</h3>
+        <table class="detail-table">
+            <tr><th>Metodologia:</th><td>{{ estudio.metodologia }}</td></tr>
+        </table>
+        <p class="detail-text"><strong>Perfil Egresado:</strong><br>{{ estudio.perfil_egresado }}</p>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('estudios_realizados.edit', id=estudio.id) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('estudios_realizados.delete', id=estudio.id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este estudio?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

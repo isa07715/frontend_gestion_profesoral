@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Rol{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Nuevo Rol del Sistema</h1>
+    <a href="{{ url_for('rol.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('rol.create') }}" class="crud-form">
+        
+        <div class="form-group">
+            <label for="nombre">Nombre del Rol *</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" required placeholder="Ej: Administrador, Docente, Estudiante">
+        </div>
+        
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea class="form-control" name="descripcion" id="descripcion" rows="3"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="activo" checked> Rol Activo
+            </label>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{{ url_for('rol.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

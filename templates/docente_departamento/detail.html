@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Vinculacion - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de Vinculacion</h1>
+    <a href="{{ url_for('docente_departamento.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion de Vinculacion</h3>
+        <table class="detail-table">
+            <tr><th>Docente (Cedula):</th><td>{{ registro.docente }}</td></tr>
+            <tr><th>Departamento/Programa:</th><td>{{ registro.departamento }}</td></tr>
+            <tr><th>Dedicacion:</th><td>{{ registro.dedicacion }}</td></tr>
+            <tr><th>Modalidad:</th><td>{{ registro.modalidad }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Fechas</h3>
+        <table class="detail-table">
+            <tr><th>Fecha Ingreso:</th><td>{{ registro.fecha_ingreso }}</td></tr>
+            <tr><th>Fecha Salida:</th><td>{{ registro.fecha_salida or 'Aun vinculado' }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('docente_departamento.edit', docente=registro.docente, departamento=registro.departamento) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('docente_departamento.delete', docente=registro.docente, departamento=registro.departamento) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este registro?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

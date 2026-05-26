@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Becas{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Becas</h1>
+    <a href="{{ url_for('beca.create') }}" class="btn btn-primary">+ Nuevo Registro</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Estudio</th>
+                <th>Tipo</th>
+                <th>Institución</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for beca in becas %}
+            <tr>
+                <td>{{ beca.nombre_estudio or beca.estudios }}</td>
+                <td>{{ beca.tipo }}</td>
+                <td>{{ beca.institucion }}</td>
+                <td>{{ beca.fecha_inicio }}</td>
+                <td>{{ beca.fecha_fin }}</td>
+                <td>
+                    <!-- Solo botón eliminar, ya que editar es igual que crear (UPSERT) -->
+                    <form method="POST" action="{{ url_for('beca.delete', estudios_id=beca.estudios) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar esta beca?')">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No hay becas registradas</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

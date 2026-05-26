@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Estudio - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Estudio Realizado</h1>
+    <a href="{{ url_for('estudios_realizados.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('estudios_realizados.edit', id=estudio.id) }}" class="crud-form">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id" value="{{ estudio.id }}" disabled>
+        </div>
+        
+        <div class="form-group">
+            <label for="titulo">Titulo</label>
+            <input type="text" id="titulo" name="titulo" value="{{ estudio.titulo }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="universidad">Universidad</label>
+            <input type="text" id="universidad" name="universidad" value="{{ estudio.universidad }}" maxlength="50" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" value="{{ estudio.fecha }}" required>
+        </div>
+        
+        <!-- ✅ CAMBIO: SELECT PARA TIPO DE ESTUDIO -->
+        <div class="form-group">
+            <label for="tipo">Tipo de Estudio *</label>
+            <select class="form-select" id="tipo" name="tipo" required>
+                <option value="">-- Seleccione Tipo --</option>
+                <option value="Pregrado" {% if estudio.tipo == 'Pregrado' %}selected{% endif %}>Pregrado</option>
+                <option value="Maestría" {% if estudio.tipo == 'Maestría' %}selected{% endif %}>Maestría</option>
+                <option value="Doctorado" {% if estudio.tipo == 'Doctorado' %}selected{% endif %}>Doctorado</option>
+                <option value="Especialización" {% if estudio.tipo == 'Especialización' %}selected{% endif %}>Especialización</option>
+                <option value="Posdoctorado" {% if estudio.tipo == 'Posdoctorado' %}selected{% endif %}>Posdoctorado</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" value="{{ estudio.ciudad }}" maxlength="45" required>
+        </div>
+        
+        <!-- SELECT PARA DOCENTE -->
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required>
+                <option value="">-- Seleccione Docente --</option>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="ins_acreditada">Institucion Acreditada</label>
+            <select class="form-select" name="ins_acreditada" required>
+                <option value="1" {% if estudio.ins_acreditada == 1 %}selected{% endif %}>Si</option>
+                <option value="0" {% if estudio.ins_acreditada == 0 %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="metodologia">Metodologia</label>
+            <input type="text" id="metodologia" name="metodologia" value="{{ estudio.metodologia }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="perfil_egresado">Perfil Egresado</label>
+            <textarea id="perfil_egresado" name="perfil_egresado" rows="4" required>{{ estudio.perfil_egresado }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="pais">Pais</label>
+            <input type="text" id="pais" name="pais" value="{{ estudio.pais }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('estudios_realizados.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

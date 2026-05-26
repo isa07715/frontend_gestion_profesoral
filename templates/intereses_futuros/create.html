@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Interés de Investigación{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Nuevo Interés de Investigación</h1>
+    <a href="{{ url_for('intereses_futuros.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('intereses_futuros.create') }}" class="crud-form">
+        
+        <!-- SELECT PARA DOCENTE -->
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" id="docente" required>
+                <option value="">-- Seleccione Docente --</option>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}">
+                        {{ d.nombres }} {{ d.apellidos }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- SELECT PARA TERMINO CLAVE -->
+        <div class="form-group">
+            <label for="termino_clave">Término Clave *</label>
+            <select class="form-select" name="termino_clave" id="termino_clave" required>
+                <option value="">-- Seleccione Término --</option>
+                
+                <!-- ✅ AQUÍ ESTÁ LA CLAVE: Usamos t.termino -->
+                {% for t in terminos %}
+                    <option value="{{ t.termino }}">
+                        {{ t.termino }}
+                    </option>
+                {% endfor %}
+                
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{{ url_for('intereses_futuros.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Beca - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de Beca</h1>
+    <a href="{{ url_for('beca.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion de la Beca</h3>
+        <table class="detail-table">
+            <tr><th>Estudio (ID):</th><td>{{ beca.estudios }}</td></tr>
+            <tr><th>Tipo:</th><td>{{ beca.tipo }}</td></tr>
+            <tr><th>Institucion:</th><td>{{ beca.institucion }}</td></tr>
+            <tr><th>Fecha Inicio:</th><td>{{ beca.fecha_inicio }}</td></tr>
+            <tr><th>Fecha Fin:</th><td>{{ beca.fecha_fin or 'Vigente' }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('beca.edit', estudios=beca.estudios) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('beca.delete', estudios=beca.estudios) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar esta beca?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Red Académica - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Nueva Red Académica</h1>
+    <a href="{{ url_for('red.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('red.create') }}" class="crud-form">
+        <div class="form-group">
+            <label for="idr">ID *</label>
+            <input type="number" id="idr" name="idr" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" required maxlength="45">
+            <small class="form-help">Ejemplo: Red Nacional de Investigación, IEEE</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="url">URL *</label>
+            <input type="url" id="url" name="url" required maxlength="45">
+            <small class="form-help">Ejemplo: https://renata.edu.co</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="pais">País *</label>
+            <input type="text" id="pais" name="pais" required maxlength="45">
+            <small class="form-help">Ejemplo: Colombia, Estados Unidos</small>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{{ url_for('red.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

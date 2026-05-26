@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Red Académica - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Red Académica</h1>
+    <a href="{{ url_for('red.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('red.edit', idr=red.idr) }}" class="crud-form">
+        <div class="form-group">
+            <label for="idr">ID</label>
+            <input type="number" id="idr" name="idr" value="{{ red.idr }}" disabled>
+            <small class="form-help">El ID no se puede modificar</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" value="{{ red.nombre }}" required maxlength="45">
+        </div>
+        
+        <div class="form-group">
+            <label for="url">URL *</label>
+            <input type="url" id="url" name="url" value="{{ red.url }}" required maxlength="45">
+        </div>
+        
+        <div class="form-group">
+            <label for="pais">País *</label>
+            <input type="text" id="pais" name="pais" value="{{ red.pais }}" required maxlength="45">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('red.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

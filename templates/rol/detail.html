@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Rol - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle del Rol</h1>
+    <a href="{{ url_for('rol.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion del Rol</h3>
+        <table class="detail-table">
+            <tr><th>ID:</th><td>{{ rol.id }}</td></tr>
+            <tr><th>Nombre:</th><td>{{ rol.nombre }}</td></tr>
+            <tr><th>Descripcion:</th><td>{{ rol.descripcion or 'N/A' }}</td></tr>
+            <tr><th>Estado:</th>
+                <td>
+                    {% if rol.activo %}
+                    <span class="badge badge-success">Activo</span>
+                    {% else %}
+                    <span class="badge badge-danger">Inactivo</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr><th>Fecha Creacion:</th><td>{{ rol.fecha_creacion }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('rol.edit', id=rol.id) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('rol.delete', id=rol.id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este rol?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

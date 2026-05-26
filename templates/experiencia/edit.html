@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Experiencia - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Experiencia Laboral</h1>
+    <a href="{{ url_for('experiencia.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('experiencia.edit', id=experiencia.id) }}" class="crud-form">
+        
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id" value="{{ experiencia.id }}" disabled>
+            <small class="form-help">El ID no se puede modificar (es la llave primaria)</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required>
+                <option value="">-- Seleccione Docente --</option>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombre_cargo">Nombre del Cargo</label>
+            <input type="text" id="nombre_cargo" name="nombre_cargo" value="{{ experiencia.nombre_cargo }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="institucion">Institucion</label>
+            <input type="text" id="institucion" name="institucion" value="{{ experiencia.institucion }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+    <label for="tipo">Tipo</label>
+    <select class="form-select" id="tipo" name="tipo" required>
+        <option value="">-- Seleccione Tipo --</option>
+        <option value="Académica" {% if experiencia.tipo == 'Académica' %}selected{% endif %}>Académica</option>
+        <option value="Administrativa" {% if experiencia.tipo == 'Administrativa' %}selected{% endif %}>Administrativa</option>
+        <option value="Investigación" {% if experiencia.tipo == 'Investigación' %}selected{% endif %}>Investigación</option>
+        <option value="Extensión" {% if experiencia.tipo == 'Extensión' %}selected{% endif %}>Extensión</option>
+        <option value="Consultoría" {% if experiencia.tipo == 'Consultoría' %}selected{% endif %}>Consultoría</option>
+        <option value="Otra" {% if experiencia.tipo == 'Otra' %}selected{% endif %}>Otra</option>
+    </select>
+</div>
+        
+        <div class="form-group">
+            <label for="fecha_inicio">Fecha Inicio</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ experiencia.fecha_inicio }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_fin">Fecha Fin</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" value="{{ experiencia.fecha_fin or '' }}">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('experiencia.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

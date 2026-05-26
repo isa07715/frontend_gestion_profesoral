@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Docente - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle Docente</h1>
+    <a href="{{ url_for('docente.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion Basica</h3>
+        <table class="detail-table">
+            <tr><th>Cedula:</th><td>{{ docente.cedula }}</td></tr>
+            <tr><th>Nombres:</th><td>{{ docente.nombres }}</td></tr>
+            <tr><th>Apellidos:</th><td>{{ docente.apellidos }}</td></tr>
+            <tr><th>Genero:</th><td>{{ docente.genero }}</td></tr>
+            <tr><th>Cargo:</th><td>{{ docente.cargo }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Contacto</h3>
+        <table class="detail-table">
+            <tr><th>Correo:</th><td>{{ docente.correo }}</td></tr>
+            <tr><th>Telefono:</th><td>{{ docente.telefono }}</td></tr>
+            <tr><th>Nacionalidad:</th><td>{{ docente.nacionalidad }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Informacion Academica</h3>
+        <table class="detail-table">
+            <tr><th>Escalafon:</th><td>{{ docente.escalafon }}</td></tr>
+            <tr><th>Categoria Minciencias:</th><td>{{ docente.cat_minciencia or 'N/A' }}</td></tr>
+            <tr><th>Convocatoria Minciencias:</th><td>{{ docente.conv_minciencia }}</td></tr>
+            <tr><th>Linea Investigacion:</th><td>{{ docente.linea_investigacion_principal or 'N/A' }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Perfil</h3>
+        <p class="detail-text">{{ docente.perfil }}</p>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('docente.edit', cedula=docente.cedula) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('docente.delete', cedula=docente.cedula) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este docente?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

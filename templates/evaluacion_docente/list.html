@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Evaluacion Docente - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Evaluaciones de Desempeño Docente</h1>
+    <a href="{{ url_for('evaluacion_docente.create') }}" class="btn btn-primary">+ Nueva Evaluacion</a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Docente (Cedula)</th>
+                <th>Semestre</th>
+                <th>Calificacion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evaluacion in evaluaciones %}
+            <tr>
+                <td>{{ evaluacion.id }}</td>
+                <td>{{ evaluacion.docente }}</td>
+                <td>{{ evaluacion.semestre }}</td>
+                <td>{{ "%.1f"|format(evaluacion.calificacion) }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('evaluacion_docente.detail', id=evaluacion.id) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ url_for('evaluacion_docente.edit', id=evaluacion.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <form method="POST" action="{{ url_for('evaluacion_docente.delete', id=evaluacion.id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar esta evaluacion?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="text-center">No hay evaluaciones registradas</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

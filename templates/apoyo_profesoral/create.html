@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Apoyo Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Nuevo Apoyo Profesoral</h1>
+    <a href="{{ url_for('apoyo_profesoral.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('apoyo_profesoral.create') }}" class="crud-form">
+        
+        <div class="form-group">
+            <label for="estudios">Estudio Realizado *</label>
+            <select class="form-select" name="estudios" id="estudios" required>
+                <option value="">Seleccione el Estudio...</option>
+                {% for est in estudios_list %}
+                    <option value="{{ est.id }}">{{ est.titulo }} (ID: {{ est.id }})</option>
+                {% endfor %}
+            </select>
+            <small class="form-text">Selecciona a qué estudio pertenece este apoyo.</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="con_apoyo">¿Recibió Apoyo? *</label>
+            <select class="form-select" name="con_apoyo" id="con_apoyo" required>
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="institucion">Institución de Apoyo</label>
+            <input type="text" class="form-control" name="institucion" id="institucion">
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo de Apoyo</label>
+            <select class="form-select" name="tipo" id="tipo">
+                <option value="">Seleccione...</option>
+                <option value="Beca">Beca</option>
+                <option value="Subsidio">Subsidio</option>
+                <option value="Préstamo">Préstamo</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{{ url_for('apoyo_profesoral.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Área de Conocimiento - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle del Área de Conocimiento</h1>
+    <div class="header-actions">
+        <a href="{{ url_for('area_conocimiento.edit', id=area.id) }}" class="btn btn-warning">
+            <span class="icon"></span> Editar
+        </a>
+        <a href="{{ url_for('area_conocimiento.list') }}" class="btn btn-secondary">
+            ← Volver al listado
+        </a>
+    </div>
+</div>
+
+<div class="detail-card">
+    <div class="detail-header">
+        <h2>{{ area.gran_area }} - {{ area.area }}</h2>
+        <span class="badge badge-info">ID: {{ area.id }}</span>
+    </div>
+    
+    <div class="detail-body">
+        <div class="detail-row">
+            <div class="detail-label">Gran Área:</div>
+            <div class="detail-value">{{ area.gran_area }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Área:</div>
+            <div class="detail-value">{{ area.area }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Disciplina:</div>
+            <div class="detail-value">{{ area.disciplina }}</div>
+        </div>
+    </div>
+    
+    <div class="detail-footer">
+        <form method="POST" action="{{ url_for('area_conocimiento.delete', id=area.id) }}" class="inline-form" onsubmit="return confirm('¿Está seguro de eliminar este registro? Esta acción no se puede deshacer.');">
+            <button type="submit" class="btn btn-danger">
+                <span class="icon"></span> Eliminar
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

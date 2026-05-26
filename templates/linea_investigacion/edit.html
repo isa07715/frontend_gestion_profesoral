@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Línea de Investigación - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Línea de Investigación</h1>
+    <a href="{{ url_for('linea_investigacion.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('linea_investigacion.edit', id=linea.id) }}" class="crud-form">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="number" id="id" name="id" value="{{ linea.id }}" disabled>
+            <small class="form-help">El ID no se puede modificar</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" value="{{ linea.nombre }}" required maxlength="45">
+        </div>
+        
+        <div class="form-group">
+            <label for="descripcion">Descripción *</label>
+            <textarea id="descripcion" name="descripcion" required maxlength="256" rows="4">{{ linea.descripcion }}</textarea>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('linea_investigacion.list') }}" class="btn btn-secondary">❌ Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

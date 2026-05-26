@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Experiencia - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de Experiencia Laboral</h1>
+    <a href="{{ url_for('experiencia.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion de la Experiencia</h3>
+        <table class="detail-table">
+            <tr><th>ID:</th><td>{{ experiencia.id }}</td></tr>
+            <tr><th>Docente (Cedula):</th><td>{{ experiencia.docente }}</td></tr>
+            <tr><th>Cargo:</th><td>{{ experiencia.nombre_cargo }}</td></tr>
+            <tr><th>Institucion:</th><td>{{ experiencia.institucion }}</td></tr>
+            <tr><th>Tipo:</th><td>{{ experiencia.tipo }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-group">
+        <h3>Fechas</h3>
+        <table class="detail-table">
+            <tr><th>Fecha Inicio:</th><td>{{ experiencia.fecha_inicio }}</td></tr>
+            <tr><th>Fecha Fin:</th><td>{{ experiencia.fecha_fin or 'Actual' }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('experiencia.edit', id=experiencia.id) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('experiencia.delete', id=experiencia.id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar esta experiencia?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

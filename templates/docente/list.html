@@ -1,0 +1,48 @@
+
+{% extends "base.html" %}
+
+{% block title %}Docentes - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Docentes</h1>
+    <a href="{{ url_for('docente.create') }}" class="btn btn-primary">+ Nuevo Docente</a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Cargo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for docente in docentes %}
+            <tr>
+                <td>{{ docente.cedula }}</td>
+                <td>{{ docente.nombres }}</td>
+                <td>{{ docente.apellidos }}</td>
+                <td>{{ docente.correo }}</td>
+                <td>{{ docente.cargo }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('docente.detail', cedula=docente.cedula) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ url_for('docente.edit', cedula=docente.cedula) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <form method="POST" action="{{ url_for('docente.delete', cedula=docente.cedula) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este docente?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No hay docentes registrados</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

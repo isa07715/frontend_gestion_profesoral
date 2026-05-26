@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Evaluacion - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de Evaluacion de Desempeño</h1>
+    <a href="{{ url_for('evaluacion_docente.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion de la Evaluacion</h3>
+        <table class="detail-table">
+            <tr><th>ID:</th><td>{{ evaluacion.id }}</td></tr>
+            <tr><th>Docente (Cedula):</th><td>{{ evaluacion.docente }}</td></tr>
+            <tr><th>Semestre:</th><td>{{ evaluacion.semestre }}</td></tr>
+            <tr><th>Calificacion:</th><td>{{ evaluacion.calificacion }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <a href="{{ url_for('evaluacion_docente.edit', id=evaluacion.id) }}" class="btn btn-warning">Editar</a>
+        <form method="POST" action="{{ url_for('evaluacion_docente.delete', id=evaluacion.id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar esta evaluacion?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

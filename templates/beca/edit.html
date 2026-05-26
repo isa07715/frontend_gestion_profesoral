@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Beca - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Beca</h1>
+    <a href="{{ url_for('beca.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('beca.edit', estudios=beca.estudios) }}" class="crud-form">
+        
+        <div class="form-group">
+            <label for="estudios">Estudio</label>
+            <input type="text" id="estudios" name="estudios" value="{{ beca.estudios }}" disabled>
+            <small class="form-help">El estudio no se puede modificar (es la llave primaria)</small>
+        </div>
+        
+        <!-- SELECT PARA ESTUDIOS (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="estudios">Estudio *</label>
+            <select class="form-select" name="estudios" required disabled>
+                {% for e in estudios %}
+                    <option value="{{ e.id }}"
+                        {{ 'selected' if registro and registro.estudios == e.id }}>
+                        {{ e.titulo }} ({{ e.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo de Beca</label>
+            <input type="text" id="tipo" name="tipo" value="{{ beca.tipo }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="institucion">Institucion</label>
+            <input type="text" id="institucion" name="institucion" value="{{ beca.institucion }}" maxlength="80" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_inicio">Fecha Inicio</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ beca.fecha_inicio }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_fin">Fecha Fin</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" value="{{ beca.fecha_fin or '' }}">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('beca.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

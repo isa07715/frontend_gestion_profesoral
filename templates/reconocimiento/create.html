@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Reconocimiento - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Nuevo Reconocimiento</h1>
+    <a href="{{ url_for('reconocimiento.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('reconocimiento.create') }}" class="crud-form">
+        
+        <!-- SELECT PARA DOCENTE -->
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required>
+                <option value="">-- Seleccione Docente --</option>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo *</label>
+            <input type="text" id="tipo" name="tipo" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="institucion">Institucion *</label>
+            <input type="text" id="institucion" name="institucion" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="ambito">Ambito *</label>
+            <select class="form-select" name="ambito" required>
+                <option value="">-- Seleccione --</option>
+                <option value="Local">Local</option>
+                <option value="Regional">Regional</option>
+                <option value="Nacional">Nacional</option>
+                <option value="Internacional">Internacional</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha">Fecha *</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{{ url_for('reconocimiento.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Terminos Clave - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Terminos Clave</h1>
+    <a href="{{ url_for('termino_clave.create') }}" class="btn btn-primary">
+        <span class="icon">+</span> Nuevo Termino Clave
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Termino (Español)</th>
+                <th>Termino (Ingles)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for termino in terminos %}
+            <tr>
+                <td>{{ termino.termino }}</td>
+                <td>{{ termino.termino_ingles or 'N/A' }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('termino_clave.detail', termino=termino.termino) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ url_for('termino_clave.edit', termino=termino.termino) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <form method="POST" action="{{ url_for('termino_clave.delete', termino=termino.termino) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este termino?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="text-center">No hay terminos clave registrados</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

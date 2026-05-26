@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Programa - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Programa Académico</h1>
+    <a href="{{ url_for('programa.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('programa.edit', id=programa.id) }}" class="crud-form">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id" value="{{ programa.id }}" disabled>
+            <small class="form-help">El ID no se puede modificar</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre del Programa</label>
+            <input type="text" id="nombre" name="nombre" value="{{ programa.nombre }}" maxlength="60" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <input type="text" id="tipo" name="tipo" value="{{ programa.tipo }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="nivel">Nivel</label>
+            <input type="text" id="nivel" name="nivel" value="{{ programa.nivel }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_creacion">Fecha Creación</label>
+            <input type="text" id="fecha_creacion" name="fecha_creacion" value="{{ programa.fecha_creacion }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_cierre">Fecha Cierre</label>
+            <input type="text" id="fecha_cierre" name="fecha_cierre" value="{{ programa.fecha_cierre or '' }}" maxlength="45">
+        </div>
+        
+        <div class="form-group">
+            <label for="numero_cohortes">Número de Cohortes</label>
+            <input type="text" id="numero_cohortes" name="numero_cohortes" value="{{ programa.numero_cohortes }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="cant_graduados">Cantidad de Graduados</label>
+            <input type="text" id="cant_graduados" name="cant_graduados" value="{{ programa.cant_graduados }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_actualizacion">Fecha Actualización</label>
+            <input type="text" id="fecha_actualizacion" name="fecha_actualizacion" value="{{ programa.fecha_actualizacion }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" value="{{ programa.ciudad }}" maxlength="45" required>
+        </div>
+        
+        <!-- ✅ CAMBIO: facultad es solo un número, NO es FK -->
+        <div class="form-group">
+            <label for="facultad">Facultad (Código)</label>
+            <input type="text" id="facultad" name="facultad" pattern="[0-9]+" maxlength="10" inputmode="numeric" value="{{ programa.facultad }}" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('programa.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Estudio-Area - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle de Relacion Estudio - Area</h1>
+    <a href="{{ url_for('estudio_ac.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="detail-container">
+    <div class="detail-group">
+        <h3>Informacion de la Relacion</h3>
+        <table class="detail-table">
+            <tr><th>Estudio (ID):</th><td>{{ registro.estudio }}</td></tr>
+            <tr><th>Area de Conocimiento (ID):</th><td>{{ registro.area_conocimiento }}</td></tr>
+        </table>
+    </div>
+    
+    <div class="detail-actions">
+        <form method="POST" action="{{ url_for('estudio_ac.delete', estudio=registro.estudio, area_conocimiento=registro.area_conocimiento) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este registro?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

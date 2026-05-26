@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Estudio - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Nuevo Estudio Realizado</h1>
+    <a href="{{ url_for('estudios_realizados.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('estudios_realizados.create') }}" class="crud-form">
+       
+        <div class="form-group">
+            <label for="titulo">Titulo *</label>
+            <input type="text" id="titulo" name="titulo" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="universidad">Universidad *</label>
+            <input type="text" id="universidad" name="universidad" maxlength="50" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha">Fecha *</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo de Estudio *</label>
+            <select class="form-select" id="tipo" name="tipo" required>
+                <option value="">-- Seleccione Tipo --</option>
+                <option value="Pregrado">Pregrado</option>
+                <option value="Maestría">Maestría</option>
+                <option value="Doctorado">Doctorado</option>
+                <option value="Especialización">Especialización</option>
+                <option value="Posdoctorado">Posdoctorado</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="ciudad">Ciudad *</label>
+            <input type="text" id="ciudad" name="ciudad" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required>
+                <option value="">-- Seleccione Docente --</option>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="ins_acreditada">Institucion Acreditada *</label>
+            <select class="form-select" name="ins_acreditada" required>
+                <option value="">-- Seleccione --</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="metodologia">Metodologia *</label>
+            <input type="text" id="metodologia" name="metodologia" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="perfil_egresado">Perfil Egresado *</label>
+            <textarea id="perfil_egresado" name="perfil_egresado" rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="pais">Pais *</label>
+            <input type="text" id="pais" name="pais" maxlength="45" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{{ url_for('estudios_realizados.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

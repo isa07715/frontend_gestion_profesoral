@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Interes Futuro - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Interes de Investigacion</h1>
+    <a href="{{ url_for('intereses_futuros.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('intereses_futuros.edit', docente=docente, termino_clave=termino_clave) }}" class="crud-form">
+        
+        <div class="form-group">
+            <label>Docente</label>
+            <input type="text" value="{{ registro.docente }}" disabled>
+            <small class="form-help">La PK compuesta no se puede modificar</small>
+        </div>
+        
+        <div class="form-group">
+            <label>Termino Clave</label>
+            <input type="text" value="{{ registro.termino_clave }}" disabled>
+        </div>
+        
+        <!-- SELECT PARA DOCENTE (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required disabled>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- SELECT PARA TERMINO CLAVE (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="termino_clave">Termino Clave *</label>
+            <select class="form-select" name="termino_clave" required disabled>
+                {% for t in terminos %}
+                    <option value="{{ t.termino }}"
+                        {{ 'selected' if registro and registro.termino_clave == t.termino }}>
+                        {{ t.termino }} ({{ t.termino }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('intereses_futuros.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

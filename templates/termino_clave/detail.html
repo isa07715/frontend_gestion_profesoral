@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Término Clave - Gestión Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Detalle del Término Clave</h1>
+    <div class="header-actions">
+        <a href="{{ url_for('termino_clave.edit', termino=termino.termino) }}" class="btn btn-warning">✏️ Editar</a>
+        <a href="{{ url_for('termino_clave.list') }}" class="btn btn-secondary">← Volver</a>
+    </div>
+</div>
+
+<div class="detail-card">
+    <div class="detail-header">
+        <h2>{{ termino.termino }}</h2>
+    </div>
+    
+    <div class="detail-body">
+        <div class="detail-row">
+            <div class="detail-label">Término (Español):</div>
+            <div class="detail-value">{{ termino.termino }}</div>
+        </div>
+        
+        <div class="detail-row">
+            <div class="detail-label">Término (Inglés):</div>
+            <div class="detail-value">{{ termino.termino_ingles or 'No disponible' }}</div>
+        </div>
+    </div>
+    
+    <div class="detail-footer">
+        <form method="POST" action="{{ url_for('termino_clave.delete', termino=termino.termino) }}" class="inline-form" onsubmit="return confirm('¿Está seguro de eliminar este término?');">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

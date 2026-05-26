@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Vinculacion Docente - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editar Vinculacion Docente</h1>
+    <a href="{{ url_for('docente_departamento.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('docente_departamento.edit', docente=docente, departamento=departamento) }}" class="crud-form">
+        
+        <div class="form-group">
+            <label>Docente</label>
+            <input type="text" value="{{ registro.docente }}" disabled>
+            <small class="form-help">La PK compuesta no se puede modificar</small>
+        </div>
+        
+        <div class="form-group">
+            <label>Departamento</label>
+            <input type="text" value="{{ registro.departamento }}" disabled>
+        </div>
+        
+        <!-- SELECT PARA DOCENTE (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required disabled>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- SELECT PARA DEPARTAMENTO (solo visual, no editable) -->
+        <div class="form-group">
+            <label for="departamento">Departamento (Programa) *</label>
+            <select class="form-select" name="departamento" required disabled>
+                {% for p in programas %}
+                    <option value="{{ p.id }}"
+                        {{ 'selected' if registro and registro.departamento == p.id }}>
+                        {{ p.nombre }} ({{ p.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- ✅ SELECT PARA DEDICACION -->
+        <div class="form-group">
+            <label for="dedicacion">Dedicacion *</label>
+            <select class="form-select" id="dedicacion" name="dedicacion" required>
+                <option value="">-- Seleccione Dedicacion --</option>
+                <option value="Tiempo Completo" {% if registro.dedicacion == 'Tiempo Completo' %}selected{% endif %}>Tiempo Completo</option>
+                <option value="Medio Tiempo" {% if registro.dedicacion == 'Medio Tiempo' %}selected{% endif %}>Medio Tiempo</option>
+                <option value="Cátedra" {% if registro.dedicacion == 'Cátedra' %}selected{% endif %}>Cátedra</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="modalidad">Modalidad</label>
+            <input type="text" id="modalidad" name="modalidad" value="{{ registro.modalidad }}" maxlength="45" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_ingreso">Fecha Ingreso</label>
+            <input type="date" id="fecha_ingreso" name="fecha_ingreso" value="{{ registro.fecha_ingreso }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_salida">Fecha Salida</label>
+            <input type="date" id="fecha_salida" name="fecha_salida" value="{{ registro.fecha_salida or '' }}">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-warning">Actualizar</button>
+            <a href="{{ url_for('docente_departamento.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

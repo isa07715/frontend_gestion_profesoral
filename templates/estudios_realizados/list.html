@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Estudios Realizados - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Estudios Realizados</h1>
+    <a href="{{ url_for('estudios_realizados.create') }}" class="btn btn-primary">+ Nuevo Estudio</a>
+</div>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Universidad</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Docente</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estudio in estudios %}
+            <tr>
+                <td>{{ estudio.id }}</td>
+                <td>{{ estudio.titulo }}</td>
+                <td>{{ estudio.universidad }}</td>
+                <td>{{ estudio.fecha }}</td>
+                <td>{{ estudio.tipo }}</td>
+                <td>{{ estudio.docente }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('estudios_realizados.detail', id=estudio.id) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ url_for('estudios_realizados.edit', id=estudio.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <form method="POST" action="{{ url_for('estudios_realizados.delete', id=estudio.id) }}" class="inline-form" onsubmit="return confirm('Esta seguro de eliminar este estudio?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="text-center">No hay estudios registrados</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

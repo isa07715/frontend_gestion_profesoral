@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva Vinculacion Docente - Gestion Profesoral{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Nueva Vinculacion Docente</h1>
+    <a href="{{ url_for('docente_departamento.list') }}" class="btn btn-secondary">← Volver al listado</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('docente_departamento.create') }}" class="crud-form">
+        
+        <!-- SELECT PARA DOCENTE -->
+        <div class="form-group">
+            <label for="docente">Docente *</label>
+            <select class="form-select" name="docente" required>
+                <option value="">-- Seleccione Docente --</option>
+                {% for d in docentes %}
+                    <option value="{{ d.cedula }}"
+                        {{ 'selected' if registro and registro.docente == d.cedula }}>
+                        {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- SELECT PARA DEPARTAMENTO (PROGRAMA) -->
+        <div class="form-group">
+            <label for="departamento">Departamento (Programa) *</label>
+            <select class="form-select" name="departamento" required>
+                <option value="">-- Seleccione Programa --</option>
+                {% for p in programas %}
+                    <option value="{{ p.id }}"
+                        {{ 'selected' if registro and registro.departamento == p.id }}>
+                        {{ p.nombre }} ({{ p.id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- ✅ SELECT PARA DEDICACION -->
+        <div class="form-group">
+            <label for="dedicacion">Dedicacion *</label>
+            <select class="form-select" id="dedicacion" name="dedicacion" required>
+                <option value="">-- Seleccione Dedicacion --</option>
+                <option value="Tiempo Completo">Tiempo Completo</option>
+                <option value="Medio Tiempo">Medio Tiempo</option>
+                <option value="Cátedra">Cátedra</option>
+            </select>
+            <small class="form-help">Seleccione el tipo de dedicación del docente</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="modalidad">Modalidad *</label>
+            <input type="text" id="modalidad" name="modalidad" maxlength="45" required placeholder="Ej: Presencial, Virtual">
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_ingreso">Fecha Ingreso *</label>
+            <input type="date" id="fecha_ingreso" name="fecha_ingreso" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fecha_salida">Fecha Salida</label>
+            <input type="date" id="fecha_salida" name="fecha_salida">
+            <small class="form-help">Dejar vacio si aun esta vinculado</small>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{{ url_for('docente_departamento.list') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
