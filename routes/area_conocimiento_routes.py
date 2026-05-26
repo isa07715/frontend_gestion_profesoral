@@ -19,20 +19,26 @@ def list():
 def create():
     """Crear nueva área de conocimiento."""
     if request.method == 'POST':
-        data = {
-            'id': int(request.form['id']),
-            'gran_area': request.form['gran_area'],
-            'area': request.form['area'],
-            'disciplina': request.form['disciplina']
-        }
-        
-        service = AreaConocimientoService()
-        if service.create(data):
-            flash('Área de conocimiento creada exitosamente', 'success')
-            return redirect(url_for('area_conocimiento.list'))
-        else:
-            flash('Error al crear el área de conocimiento', 'error')
-    
+        try:
+            data = {
+                'id': int(request.form['id']),
+                'gran_area': request.form['gran_area'],
+                'area': request.form['area'],
+                'disciplina': request.form['disciplina']
+            }
+
+            service = AreaConocimientoService()
+
+            if service.create(data):
+                flash('Área de conocimiento creada exitosamente', 'success')
+                return redirect(url_for('area_conocimiento.list'))
+            else:
+                flash('Error al crear el área de conocimiento', 'error')
+
+        except Exception as e:
+            print(e)
+            flash(f'Error: {e}', 'error')
+
     return render_template('area_conocimiento/create.html')
 
 
