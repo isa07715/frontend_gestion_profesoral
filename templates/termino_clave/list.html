@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for termino in terminos %}
+            {% for termino in terminos [] %}
             <tr>
                 <td>{{ termino.termino }}</td>
                 <td>{{ termino.termino_ingles or 'N/A' }}</td>

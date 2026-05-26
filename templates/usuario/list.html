@@ -8,7 +8,7 @@
 <table class="table table-striped">
     <thead><tr><th>ID</th><th>Username</th><th>Nombre</th><th>Email</th><th>Estado</th><th>Acciones</th></tr></thead>
     <tbody>
-        {% for u in usuarios %}
+        {% for u in usuarios [] %}
         <tr>
             <td>{{ u.id }}</td>
             <td>{{ u.username }}</td>
