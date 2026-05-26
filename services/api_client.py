@@ -54,12 +54,18 @@ class APIClient:
         except requests.RequestException as e:
             print(f"Error en GET {endpoint}: {e}")
             return None
-    
+        
     def post(self, endpoint, data=None):
         """POST request."""
         try:
             url = f"{self.base_url}{endpoint}"
+            
+            print("POST URL:", url)
+            print("POST DATA:", data)
+            
             response = self.session.post(url, json=data, timeout=self.timeout)
+            
+            print("TEXT:", response.text)
             return self._handle_response(response)
         except requests.RequestException as e:
             print(f"Error en POST {endpoint}: {e}")
