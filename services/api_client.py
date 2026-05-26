@@ -65,8 +65,10 @@ class APIClient:
             
             response = self.session.post(url, json=data, timeout=self.timeout)
             
+            print("STATUS:", response.status_code)
             print("TEXT:", response.text)
             return self._handle_response(response)
+    
         except requests.RequestException as e:
             print(f"Error en POST {endpoint}: {e}")
             return None
