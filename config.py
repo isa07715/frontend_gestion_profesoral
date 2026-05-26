@@ -15,7 +15,7 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-key-change-in-production')
     
     # URL de la API FastAPI
-    API_BASE_URL = os.getenv('API_BASE_URL', 'http://localhost:8000')
+    API_BASE_URL = os.getenv('API_BASE_URL', 'https://api-gestion-profesoral-6q83.onrender.com')
     API_TIMEOUT = int(os.getenv('API_TIMEOUT', '30'))
     
     # Configuración de sesiones
