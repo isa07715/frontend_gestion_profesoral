@@ -16,7 +16,7 @@
             <label for="red">Red *</label>
             <select class="form-select" name="red" required>
                 <option value="">-- Seleccione Red --</option>
-                {% for r in redes %}
+                {% for r in redes [] %}
                     <option value="{{ r.idr }}"
                         {{ 'selected' if registro and registro.red == r.idr }}>
                         {{ r.nombre }} ({{ r.idr }})
@@ -30,7 +30,7 @@
             <label for="docente">Docente *</label>
             <select class="form-select" name="docente" required>
                 <option value="">-- Seleccione Docente --</option>
-                {% for d in docentes %}
+                {% for d in docentes or [] %}
                     <option value="{{ d.cedula }}"
                         {{ 'selected' if registro and registro.docente == d.cedula }}>
                         {{ d.nombres }} {{ d.apellidos }} ({{ d.cedula }})

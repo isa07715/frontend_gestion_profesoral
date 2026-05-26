@@ -16,7 +16,7 @@
             <label for="estudio">Estudio *</label>
             <select class="form-select" name="estudio" required>
                 <option value="">-- Seleccione Estudio --</option>
-                {% for e in estudios %}
+                {% for e in estudios or [] %}
                     <option value="{{ e.id }}"
                         {{ 'selected' if registro and registro.estudio == e.id }}>
                         {{ e.titulo }} ({{ e.id }})
@@ -30,7 +30,7 @@
             <label for="area_conocimiento">Area de Conocimiento *</label>
             <select class="form-select" name="area_conocimiento" required>
                 <option value="">-- Seleccione Area --</option>
-                {% for a in areas %}
+                {% for a in areas or [] %}
                     <option value="{{ a.id }}"
                         {{ 'selected' if registro and registro.area_conocimiento == a.id }}>
                         {{ a.disciplina }} ({{ a.id }})

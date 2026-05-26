@@ -30,7 +30,7 @@
             <label for="departamento">Departamento (Programa) *</label>
             <select class="form-select" name="departamento" required>
                 <option value="">-- Seleccione Programa --</option>
-                {% for p in programas %}
+                {% for p in programas [] %}
                     <option value="{{ p.id }}"
                         {{ 'selected' if registro and registro.departamento == p.id }}>
                         {{ p.nombre }} ({{ p.id }})

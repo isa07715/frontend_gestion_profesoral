@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for area in areas %}
+            {% for area in areas or [] %}
             <tr>
                 <td>{{ area.id }}</td>
                 <td>{{ area.gran_area }}</td>

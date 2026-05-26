@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for apoyo in apoyos %}
+            {% for apoyo in apoyos []%}
             <tr>
                 <td>{{ apoyo.estudios }}</td>
                 <td>{{ apoyo.nombre_estudio or 'N/A' }}</td>
