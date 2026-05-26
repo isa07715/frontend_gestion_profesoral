@@ -25,6 +25,10 @@ class APIClient:
     
     def _handle_response(self, response):
         """Manejar respuesta de la API."""
+        print("STATUS CODE:", response.status_code)
+        print("RESPONSE TEXT:", response.text)
+
+
         if response.status_code == 401:
             if session:
                 session.pop('token', None)
